@@ -40,10 +40,7 @@ async def detect_crop_disease(image: UploadFile = File(..., description="Upload 
             image_bytes
         )
 
-        return {
-            "success": True,
-            "prediction": result
-        }
+        return result
 
     except HTTPException:
         # re-raise known HTTP errors

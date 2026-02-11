@@ -18,8 +18,8 @@ async def lifespan(app: FastAPI):
     print("=" * 60)
     print(f"🚀 {settings.app_name} v{settings.version}")
     print("=" * 60)
-    print(f"📊 Model loaded from: {settings.model_path}")
-    print(f"📐 Scaler loaded from: {settings.scaler_path}")
+    # print(f"📊 Model loaded from: {settings.model_path}")
+    # print(f"📐 Scaler loaded from: {settings.scaler_path}")
     print(f"📝 Documentation: http://localhost:8000/docs")
     print("=" * 60)
     

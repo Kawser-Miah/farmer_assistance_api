@@ -21,8 +21,12 @@ class Settings(BaseSettings):
     
     # Path Configuration
     base_dir: Path = Path(__file__).parent.parent.parent
-    model_path: Path = base_dir / "artifacts" / "heart-disease-prediction-knn-model.pkl"
-    scaler_path: Path = base_dir / "artifacts" / "scaler.pkl"
+    crop_disease_detection_model_path: Path = base_dir / "assets" / "crop_disease_detection_ml_model.h5"
+    crop_disease_detection_class_names_path: Path = base_dir / "assets" / "crop_disease_detection_class_names.json"
+    
+    # Aliases for easier access
+    model_path: Path = crop_disease_detection_model_path
+    class_names_path: Path = crop_disease_detection_class_names_path
     
     # Model Configuration
     prediction_threshold: float = 0.5  # Not currently used, but available

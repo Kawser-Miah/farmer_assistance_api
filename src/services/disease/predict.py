@@ -1,6 +1,7 @@
 import numpy as np
 from src.services.disease.model import get_model, get_class_names
 from src.services.disease.preprocess import preprocess_image
+from src.schemas.crop_disease_schemas import DiseasePredictionResponse
 
 def predict_disease(image_bytes: bytes):
     if not image_bytes:
@@ -15,7 +16,7 @@ def predict_disease(image_bytes: bytes):
     class_idx = int(np.argmax(preds, axis=1)[0])
     confidence = float(preds[0][class_idx]) * 100
 
-    return {
-        "label": class_names[class_idx],
-        "confidence": round(confidence, 2)
-    }
+    return DiseasePredictionResponse(
+        label=class_names[class_idx],
+        confidence=round(confidence, 2)
+    )

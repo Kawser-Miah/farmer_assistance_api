@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.applications.resnet50 import preprocess_input # type: ignore
 
 DEFAULT_IMAGE_SIZE = (224, 224)
 

@@ -37,6 +37,11 @@ class Settings(BaseSettings):
     port: int = 8000
     cors_origins: list = ["*"]  # Change in production
     
+    # Supabase Configuration
+    supabase_url: str = ""
+    supabase_anon_key: str = ""
+    supabase_service_key: str = ""
+    
     model_config = ConfigDict(
         env_file=".env",
         case_sensitive=False

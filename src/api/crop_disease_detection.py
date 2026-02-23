@@ -1,7 +1,9 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from src.core.jwt_validation import decode_supabase_jwt
 from fastapi.concurrency import run_in_threadpool
 from src.services.disease.predict import predict_disease
 from src.core.config import settings
+from src.core.database import supabase
 
 
 router = APIRouter(
@@ -15,7 +17,8 @@ router = APIRouter(
      summary="Crop Disease Detection API",
      description="Endpoint for detecting crop diseases from images."
 )
-async def detect_crop_disease(image: UploadFile = File(..., description="Upload an image of the crop for disease detection.", example="crop.jpg")):
+async def detect_crop_disease(user_id: str = Depends(decode_supabase_jwt),
+    image: UploadFile = File(..., description="Upload an image of the crop for disease detection.", example="crop.jpg")):
     """Detect crop diseases from uploaded images."""
     try:
         # validate content type
@@ -37,7 +40,8 @@ async def detect_crop_disease(image: UploadFile = File(..., description="Upload 
         # run prediction (CPU-bound → threadpool)
         result = await run_in_threadpool(
             predict_disease,
-            image_bytes
+            image_bytes,
+            user_id
         )
 
         return result
@@ -58,4 +62,26 @@ async def detect_crop_disease(image: UploadFile = File(..., description="Upload 
         raise HTTPException(
             status_code=500,
             detail=str(e)   # 👈 TEMPORARY
+        )
+
+@router.get(
+    "/test-users",
+    summary="Test Supabase Connection",
+    description="Simple test endpoint to fetch users from Supabase."
+)
+async def test_users():
+    """Test endpoint to verify Supabase connection."""
+    try:
+        response = supabase.table("users").select("*").execute()
+        
+        return {
+            "success": True,
+            "count": len(response.data),
+            "data": response.data
+        }
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to fetch users: {str(e)}"
         )

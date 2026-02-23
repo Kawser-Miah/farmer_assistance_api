@@ -6,3 +6,7 @@ python-multipart
 tensorflow
 opencv-python
 numpy
+supabase 
+python-dotenv
+python-jose
+requests

@@ -18,11 +18,12 @@ def ingest_documents(documents: list[str]):
 
     print("Documents ingested successfully.")
 
-documents = [
-    "Tomato early blight causes brown circular spots on leaves.",
-    "Powdery mildew appears as white powder on plant leaves.",
-    "Aphids damage plants by sucking sap from leaves.",
-    "Nitrogen fertilizer improves plant leaf growth."
-]
+if __name__ == "__main__":
+    documents = [
+        "Tomato early blight causes brown circular spots on leaves.",
+        "Powdery mildew appears as white powder on plant leaves.",
+        "Aphids damage plants by sucking sap from leaves.",
+        "Nitrogen fertilizer improves plant leaf growth."
+    ]
 
-ingest_documents(documents)
+    ingest_documents(documents)

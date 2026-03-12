@@ -10,6 +10,7 @@ supabase
 python-dotenv
 python-jose
 requests
-google-generativeai
+google-genai
 sentence-transformers
 protobuf==6.31.1
+pypdf

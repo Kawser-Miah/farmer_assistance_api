@@ -1,10 +1,7 @@
 from supabase import create_client
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
+from src.core.config import settings
 
 supabase = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_ANON_KEY")  # using anon key
+    settings.supabase_url,
+    settings.supabase_anon_key
 )

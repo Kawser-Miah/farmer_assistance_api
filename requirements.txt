@@ -10,3 +10,6 @@ supabase
 python-dotenv
 python-jose
 requests
+google-generativeai
+sentence-transformers
+protobuf==6.31.1

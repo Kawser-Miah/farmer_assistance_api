@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings
 from pydantic import ConfigDict
 from pathlib import Path
 
-print(f"Debug: Base directory is {Path(__file__).parent.parent.parent}")
+
 class Settings(BaseSettings):
     """Application settings and configuration.
     
@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     
     # API Configuration
     crop_disease_detection_prefix: str = "/crop-disease"
+    ai_chat_prefix: str = "/ai-chat"
     host: str = "0.0.0.0"
     port: int = 8000
     cors_origins: list = ["*"]  # Change in production
@@ -41,10 +42,12 @@ class Settings(BaseSettings):
     supabase_url: str = ""
     supabase_anon_key: str = ""
     supabase_service_key: str = ""
+    google_api_key: str = ""
     
     model_config = ConfigDict(
         env_file=".env",
-        case_sensitive=False
+        case_sensitive=False,
+        extra="ignore"
     )
 
 

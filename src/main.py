@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.core.config import settings
-from src.api import crop_disease_detection
+from src.api import crop_disease_detection, ai_chat
 
 
 @asynccontextmanager
@@ -53,6 +53,11 @@ app.add_middleware(
 app.include_router(
     crop_disease_detection.router,
     tags=["Crop Disease Detection"]
+)
+
+app.include_router(
+    ai_chat.router,
+    tags=["AI Chat"]
 )
 
 # app.include_router(

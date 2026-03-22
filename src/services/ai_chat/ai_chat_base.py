@@ -18,7 +18,7 @@ def chat_with_ai(query: str):
     # 3 Create context
     context = "\n".join([doc["content"] for doc in safe_documents])
     if not context:
-        context = "No relevant farming documents were found. Give a careful best-effort answer."
+        context = "No specific documents found in knowledge base. Use your agricultural expertise to answer."
 
     # 4 Ask Gemini
     answer = ask_gemini(cleaned_query, context)

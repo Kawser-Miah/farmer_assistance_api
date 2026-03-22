@@ -1,7 +1,8 @@
 import io
-from fastapi import APIRouter, HTTPException, UploadFile, File, status, Path, Query
+from fastapi import APIRouter, HTTPException, UploadFile, File, status, Path, Query, Depends
 from fastapi.concurrency import run_in_threadpool
 from uuid import UUID
+from src.core.jwt_validation import decode_supabase_jwt
 from src.services.ai_chat.ai_chat_base import chat_with_ai
 from src.services.ai_chat.rag.ingest import ingest_documents
 from src.services.ai_chat.conversation_history import ConversationHistory
@@ -41,7 +42,7 @@ router = APIRouter(
         500: {"model": ErrorResponse},
     },
 )
-async def ai_chat(request: ChatRequest):
+async def ai_chat(request: ChatRequest, user_id: str = Depends(decode_supabase_jwt)):
     try:
         # Convert ChatMessage objects to dict format for processing
         client_history = None
@@ -58,7 +59,7 @@ async def ai_chat(request: ChatRequest):
         response = await run_in_threadpool(
             chat_with_ai,
             request.query,
-            request.user_id,
+            user_id,
             request.conversation_id,
             client_history
         )

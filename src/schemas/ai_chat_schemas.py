@@ -18,7 +18,6 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     query: str = Field(..., min_length=1, max_length=2000, examples=["How can I treat powdery mildew in cucumber?"])
-    user_id: str = Field(..., examples=["user123"])
     conversation_id: Optional[UUID] = Field(None, examples=[uuid4()])
     conversation_history: Optional[List[ChatMessage]] = Field(None, description="Client's current conversation history (optional)")
 

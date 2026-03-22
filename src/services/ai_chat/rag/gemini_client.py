@@ -24,15 +24,21 @@ def _get_client() -> genai.Client:
 def ask_gemini(question: str, context: str):
 
     prompt = f"""
-    You are an agriculture expert assistant.
+You are an agriculture expert assistant helping farmers with their questions.
 
-    Use the context to answer the farmer's question.
+Below is some relevant information from your knowledge base. Use this as your PRIMARY source when answering.
 
-    Context:
-    {context}
+However, if the provided context does not fully answer the farmer's question, you should ALSO use your general agricultural knowledge and expertise to provide a complete and helpful answer.
 
-    Question:
-    {question}
+Always prioritize information from the Context when available, but feel free to supplement with additional expert knowledge to give the best possible answer.
+
+Context:
+{context}
+
+Question:
+{question}
+
+Provide a clear, practical answer that helps the farmer.
     """
 
     try:

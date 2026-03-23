@@ -387,6 +387,7 @@ class ConversationHistory:
                     if conv_id not in conversations_dict:
                         conversations_dict[conv_id] = {
                             "conversation_id": conv_id,
+                            "title": ctx.get("title") or first_question,
                             "first_question": None,
                             "last_activity": msg["created_at"],
                             "message_count": 0

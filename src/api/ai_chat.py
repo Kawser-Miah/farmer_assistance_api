@@ -87,7 +87,7 @@ async def ai_chat(request: ChatRequest, user_id: str = Depends(decode_supabase_j
 
 
 @router.get(
-    "/conversations/{user_id}",
+    "/conversations",
     response_model=UserConversations,
     summary="Get all conversations for a user",
     description="Retrieve all conversation summaries for a specific user",
@@ -97,7 +97,7 @@ async def ai_chat(request: ChatRequest, user_id: str = Depends(decode_supabase_j
     },
 )
 async def get_user_conversations(
-    user_id: str = Path(..., description="User ID to get conversations for"),
+    user_id: str = Depends(decode_supabase_jwt),
     limit: int = Query(20, ge=1, le=100, description="Maximum number of conversations to return")
 ):
     try:

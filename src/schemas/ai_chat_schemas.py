@@ -48,6 +48,7 @@ class ConversationHistory(BaseModel):
 
 class ConversationSummary(BaseModel):
     conversation_id: UUID = Field(..., examples=[uuid4()])
+    title: str = Field(..., examples=["Tomato Disease Treatment"])
     first_question: str = Field(..., examples=["What is crop rotation?"])
     last_activity: str = Field(..., examples=["2024-03-22T10:30:00Z"])
     message_count: int = Field(..., examples=[4])

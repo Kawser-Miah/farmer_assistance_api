@@ -119,7 +119,7 @@ async def get_user_conversations(
 
 
 @router.get(
-    "/conversations/{user_id}/{conversation_id}",
+    "/conversations/{conversation_id}",
     response_model=ConversationHistorySchema,
     summary="Get conversation history",
     description="Retrieve Q&A pairs from a specific conversation",
@@ -129,7 +129,7 @@ async def get_user_conversations(
     },
 )
 async def get_conversation_history(
-    user_id: str = Path(..., description="User ID"),
+    user_id: str = Depends(decode_supabase_jwt),
     conversation_id: UUID = Path(..., description="Conversation ID"),
     limit: int = Query(50, ge=1, le=100, description="Maximum number of Q&A pairs to return")
 ):
@@ -170,7 +170,7 @@ async def get_conversation_history(
 
 
 @router.delete(
-    "/conversations/{user_id}/{conversation_id}",
+    "/conversations/{conversation_id}",
     summary="Delete a conversation",
     description="Delete a conversation and all its messages",
     responses={
@@ -179,7 +179,7 @@ async def get_conversation_history(
     },
 )
 async def delete_conversation(
-    user_id: str = Path(..., description="User ID"),
+    user_id: str = Depends(decode_supabase_jwt),
     conversation_id: UUID = Path(..., description="Conversation ID to delete")
 ):
     try:

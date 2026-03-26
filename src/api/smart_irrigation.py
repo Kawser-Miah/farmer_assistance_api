@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.concurrency import run_in_threadpool
 from src.core.jwt_validation import decode_supabase_jwt
 from src.core.config import settings
 from src.schemas.smart_irrigation_schemas import IrrigationRequest, IrrigationResponse
@@ -39,7 +40,11 @@ async def predict_irrigation_need(
     - input_features: Echo of input features for verification
     """
     try:
-        result = predict_irrigation(request)
+        # Run prediction in threadpool (CPU-bound operation)
+        result = await run_in_threadpool(
+            predict_irrigation,
+            request
+        )
         return result
 
     except FileNotFoundError as e:

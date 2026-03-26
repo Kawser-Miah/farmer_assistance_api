@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     base_dir: Path = Path(__file__).parent.parent.parent
     crop_disease_detection_model_path: Path = base_dir / "assets" / "crop_disease_detection_ml_model.h5"
     crop_disease_detection_class_names_path: Path = base_dir / "assets" / "crop_disease_detection_class_names.json"
+    smart_irrigation_model_path: Path = base_dir / "assets" / "best_irrigation_model.pkl"
     
     # Aliases for easier access
     model_path: Path = crop_disease_detection_model_path
@@ -34,6 +35,7 @@ class Settings(BaseSettings):
     # API Configuration
     crop_disease_detection_prefix: str = "/crop-disease"
     ai_chat_prefix: str = "/ai-chat"
+    smart_irrigation_prefix: str = "/smart-irrigation"
     host: str = "0.0.0.0"
     port: int = 8000
     cors_origins: list = ["*"]  # Change in production

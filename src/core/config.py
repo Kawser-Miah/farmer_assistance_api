@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     crop_disease_detection_model_path: Path = base_dir / "assets" / "crop_disease_detection_ml_model.h5"
     crop_disease_detection_class_names_path: Path = base_dir / "assets" / "crop_disease_detection_class_names.json"
     smart_irrigation_model_path: Path = base_dir / "assets" / "best_irrigation_model.pkl"
+    fertilizer_model_path: Path = base_dir / "assets" / "fertilizer_model.pkl"
+    fertilizer_encoder_path: Path = base_dir / "assets" / "fertilizer_encoder.pkl"
+    crop_encoder_path: Path = base_dir / "assets" / "crop_encoder.pkl"
+    soil_encoder_path: Path = base_dir / "assets" / "soil_encoder.pkl"
     
     # Aliases for easier access
     model_path: Path = crop_disease_detection_model_path
@@ -36,6 +40,7 @@ class Settings(BaseSettings):
     crop_disease_detection_prefix: str = "/crop-disease"
     ai_chat_prefix: str = "/ai-chat"
     smart_irrigation_prefix: str = "/smart-irrigation"
+    fertilizer_tips_prefix: str = "/fertilizer-tips"
     host: str = "0.0.0.0"
     port: int = 8000
     cors_origins: list = ["*"]  # Change in production

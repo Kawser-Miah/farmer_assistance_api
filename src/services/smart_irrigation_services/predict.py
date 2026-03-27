@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Dict
-from src.services.smart_irrigation_services.model import get_irrigation_model
+from src.services.smart_irrigation_services.model import get_irrigation_model, get_irrigation_soil_encoder, get_irrigation_crop_encoder, get_irrigation_stage_encoder
 from src.schemas.smart_irrigation_schemas import IrrigationRequest, IrrigationResponse
 
 
@@ -30,12 +30,33 @@ def predict_irrigation(request: IrrigationRequest) -> IrrigationResponse:
 
     # Load model
     model = get_irrigation_model()
+    soil_encoder = get_irrigation_soil_encoder()
+    crop_encoder = get_irrigation_crop_encoder()
+    stage_encoder = get_irrigation_stage_encoder()
+    # Encode categorical features
+    try:
+        soil_encoded = soil_encoder.transform([request.soil_type])[0]
+    except Exception as e:
+        print(f"Error encoding soil type: {e}")
+        soil_encoded = 0
+
+    try:
+        crop_encoded = crop_encoder.transform([request.crop_id])[0]
+    except Exception as e:
+        print(f"Error encoding crop id: {e}")
+        crop_encoded = 0
+
+    try:
+        stage_encoded = stage_encoder.transform([request.seedling_stage])[0]
+    except Exception as e:
+        print(f"Error encoding seedling stage: {e}")
+        stage_encoded = 0
 
     # Prepare features
     features = np.array([[
-        request.crop_id,
-        request.soil_type,
-        request.seedling_stage,
+        crop_encoded,
+        soil_encoded,
+        stage_encoded,
         request.moi,
         request.temp,
         request.humidity

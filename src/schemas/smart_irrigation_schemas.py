@@ -3,9 +3,9 @@ from pydantic import BaseModel, Field
 
 class IrrigationRequest(BaseModel):
     """Request model for smart irrigation prediction."""
-    crop_id: int = Field(..., ge=0, example=1, description="Crop ID")
-    soil_type: int = Field(..., ge=0, example=0, description="Soil type (encoded)")
-    seedling_stage: int = Field(..., ge=0, example=2, description="Seedling stage")
+    crop_id: str = Field(...,  example="Wheat", description="Crop ID")
+    soil_type: str = Field(...,  example="Clay Soil", description="Soil type (encoded)")
+    seedling_stage: str = Field(...,  example="Vegetative Growth / Root or Tuber Development", description="Seedling stage")
     moi: float = Field(..., ge=0, le=100, example=40.0, description="Soil moisture (%)")
     temp: float = Field(..., example=30.0, description="Temperature (°C)")
     humidity: float = Field(..., ge=0, le=100, example=60.0, description="Humidity (%)")

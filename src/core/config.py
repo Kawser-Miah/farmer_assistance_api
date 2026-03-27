@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     fertilizer_encoder_path: Path = base_dir / "assets" / "fertilizer_encoder.pkl"
     crop_encoder_path: Path = base_dir / "assets" / "crop_encoder.pkl"
     soil_encoder_path: Path = base_dir / "assets" / "soil_encoder.pkl"
+    yield_model_path: Path = base_dir / "assets" / "yield_model.pkl"
+    item_encoder_path: Path = base_dir / "assets" / "item_encoder.pkl"
+    area_encoder_path: Path = base_dir / "assets" / "area_encoder.pkl"
     
     # Aliases for easier access
     model_path: Path = crop_disease_detection_model_path
@@ -41,6 +44,7 @@ class Settings(BaseSettings):
     ai_chat_prefix: str = "/ai-chat"
     smart_irrigation_prefix: str = "/smart-irrigation"
     fertilizer_tips_prefix: str = "/fertilizer-tips"
+    yield_estimation_prefix: str = "/yield-estimation"
     host: str = "0.0.0.0"
     port: int = 8000
     cors_origins: list = ["*"]  # Change in production

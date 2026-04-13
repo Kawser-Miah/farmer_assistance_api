@@ -26,7 +26,7 @@ router = APIRouter(
 )
 async def predict_crop_yield(
     request: YieldEstimationRequest,
-    # user_id: str = Depends(decode_supabase_jwt)
+    user_id: str = Depends(decode_supabase_jwt)
 ):
     """
     Predict crop yield for given conditions.

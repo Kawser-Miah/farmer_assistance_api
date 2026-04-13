@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.core.config import settings
-from src.api import crop_disease_detection, ai_chat, smart_irrigation, fertilizer_tips, yield_estimation, crop_recommendation
+from src.api import crop_disease_detection, ai_chat, smart_irrigation, fertilizer_tips, yield_estimation, crop_recommendation, price_predection
 
 
 
@@ -79,6 +79,11 @@ app.include_router(
 app.include_router(
     crop_recommendation.router,
     tags=["Crop Recommendation"]
+)
+
+app.include_router(
+    price_predection.router,
+    tags=["Price Prediction"]
 )
 
 

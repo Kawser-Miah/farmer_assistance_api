@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     item_encoder_path: Path = base_dir / "assets" / "item_encoder.pkl"
     area_encoder_path: Path = base_dir / "assets" / "area_encoder.pkl"
     crop_recommendation_model_path: Path = base_dir / "assets" / "crop_recommendation_model.pkl"
+    price_predection_bundle_path: Path = base_dir / "assets" / "price_predection.pkl"
 
     
     # Aliases for easier access
@@ -51,6 +52,7 @@ class Settings(BaseSettings):
     fertilizer_tips_prefix: str = "/fertilizer-tips"
     yield_estimation_prefix: str = "/yield-estimation"
     crop_recommendation_prefix: str = "/crop-recommendation"
+    price_predection_prefix: str = "/price-prediction"
 
     host: str = "0.0.0.0"
     port: int = 8000

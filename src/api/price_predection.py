@@ -26,7 +26,7 @@ router = APIRouter(
 )
 async def predict_commodity_price(
     request: PricePredictionRequest,
-    # user_id: str = Depends(decode_supabase_jwt)
+    user_id: str = Depends(decode_supabase_jwt)
 ):
     """
     Predict commodity price (BDT) for given market and temporal conditions.

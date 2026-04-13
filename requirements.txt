@@ -6,6 +6,7 @@ python-multipart
 tensorflow
 opencv-python
 numpy
+xgboost
 supabase 
 python-dotenv
 python-jose
